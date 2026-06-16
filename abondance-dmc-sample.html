@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abondance — DMC Paris / Spec Sample by The Silk Pen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── DESIGN PLAN ─────────────────────────────────────────────────────
+       Subject: Abondance Experience, DMC Paris, targeting international
+       corporate event planners (UK, US, Middle East, Nordics).
+       Audience: Senior planners, EAs to C-suite, incentive travel buyers.
+       Page job: Communicate taste, access, and trust in ~90 seconds.
+
+       PALETTE
+       --nuit:    #111210   Deep Paris night — authority, not aggression
+       --pierre:  #2e2c28   Stone — structural mid-tone
+       --brume:   #f0ede6   Morning mist — the breathing space
+       --sable:   #c8b99a   River sand — warmth without gold-rush excess
+       --cuivre:  #9b6f4e   Burnished copper — the single warm accent
+       --blanc:   #faf8f4   Off-white — body background
+
+       TYPE
+       --display: Fraunces (optical-size serif — editorial, slightly literary,
+                  completely unlike the DMC category defaults)
+       --body:    DM Sans (clean, contemporary, internationalist)
+
+       SIGNATURE ELEMENT
+       Full-bleed experience cards that open like theatre curtains on hover —
+       each card is a scene, not a service item. The experiences do the selling.
+    ─────────────────────────────────────────────────────────────────────── */
+
+    :root {
+      --nuit:   #111210;
+      --pierre: #2e2c28;
+      --brume:  #f0ede6;
+      --sable:  #c8b99a;
+      --cuivre: #9b6f4e;
+      --blanc:  #faf8f4;
+      --gris:   #7a7670;
+
+      --display: 'Fraunces', Georgia, serif;
+      --body:    'DM Sans', system-ui, sans-serif;
+
+      --max:  1100px;
+      --pad:  clamp(1.5rem, 5vw, 4rem);
+      --col:  720px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--blanc);
+      color: var(--nuit);
+      font-family: var(--body);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem var(--pad);
+      background: var(--blanc);
+      border-bottom: 1px solid rgba(200,185,154,0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    .nav-logo {
+      font-family: var(--display);
+      font-size: 1.3rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--nuit);
+      text-decoration: none;
+    }
+
+    .nav-right {
+      display: flex; align-items: center; gap: 2.5rem;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--nuit); }
+
+    .nav-cta {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.5rem;
+      border: 1px solid var(--nuit);
+      color: var(--nuit);
+      text-decoration: none;
+      transition: background 0.22s, color 0.22s;
+    }
+
+    .nav-cta:hover { background: var(--nuit); color: var(--blanc); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--nuit);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 8rem var(--pad) 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle ambient texture — the Paris night sky */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(155,111,78,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 80%, rgba(200,185,154,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--sable);
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    .hero-headline {
+      font-family: var(--display);
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: var(--brume);
+      margin-bottom: 3.5rem;
+      max-width: min(800px, 100%);
+    }
+
+    .hero-headline em {
+      font-style: italic;
+      color: var(--sable);
+    }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem 4rem;
+      align-items: end;
+      border-top: 1px solid rgba(200,185,154,0.2);
+      padding-top: 2.5rem;
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(240,237,230,0.6);
+      max-width: min(500px, 100%);
+    }
+
+    .hero-sub strong {
+      color: var(--brume);
+      font-weight: 400;
+    }
+
+    .hero-scroll {
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--sable);
+      white-space: nowrap;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 2.5rem;
+      background: var(--sable);
+      opacity: 0.4;
+    }
+
+    /* ── INTRO SECTION ── */
+    .intro {
+      max-width: var(--col);
+      margin: 0 auto;
+      padding: 6rem var(--pad);
+    }
+
+    .section-tag {
+      font-size: 0.6rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--cuivre);
+      margin-bottom: 1.8rem;
+      display: block;
+    }
+
+    .intro-heading {
+      font-family: var(--display);
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--nuit);
+      margin-bottom: 2rem;
+    }
+
+    .intro-heading em { font-style: italic; }
+
+    .body-text {
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--pierre);
+      margin-bottom: 1.4rem;
+    }
+
+    .body-text:last-child { margin-bottom: 0; }
+
+    /* ── DIVIDER ── */
+    .rule {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      border: none;
+      border-top: 1px solid rgba(200,185,154,0.3);
+    }
+
+    /* ── EXPERIENCE CARDS — the signature element ── */
+    .experiences {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5rem var(--pad);
+    }
+
+    .exp-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      gap: 2rem;
+    }
+
+    .exp-heading {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 300;
+      color: var(--nuit);
+    }
+
+    .exp-heading em { font-style: italic; }
+
+    .exp-link {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cuivre);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 1px solid rgba(155,111,78,0.3);
+      padding-bottom: 0.1rem;
+      transition: border-color 0.2s;
+      flex-shrink: 0;
+    }
+
+    .exp-link:hover { border-color: var(--cuivre); }
+
+    /* Cards grid */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(200,185,154,0.15);
+    }
+
+    .card {
+      background: var(--blanc);
+      padding: 2.8rem 2.4rem 2.4rem;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      transition: background 0.35s ease;
+    }
+
+    /* Theatre curtain reveal on hover */
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--nuit);
+      transform: translateY(101%);
+      transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+      z-index: 0;
+    }
+
+    .card:hover::after { transform: translateY(0); }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-num {
+      font-family: var(--display);
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--sable);
+      margin-bottom: 1.8rem;
+      display: block;
+      transition: color 0.35s;
+    }
+
+    .card:hover .card-num { color: rgba(200,185,154,0.5); }
+
+    .card-title {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--nuit);
+      margin-bottom: 1.2rem;
+      transition: color 0.35s;
+    }
+
+    .card:hover .card-title { color: var(--brume); }
+
+    .card-body {
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--gris);
+      margin-bottom: 1.8rem;
+      transition: color 0.35s;
+    }
+
+    .card:hover .card-body { color: rgba(240,237,230,0.55); }
+
+    .card-tag {
+      font-size: 0.58rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cuivre);
+      transition: color 0.35s;
+    }
+
+    .card:hover .card-tag { color: var(--sable); }
+
+    /* ── HOW WE WORK ── */
+    .how {
+      background: var(--brume);
+      padding: 6rem var(--pad);
+    }
+
+    .how-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem 6rem;
+      align-items: start;
+    }
+
+    .how-left {}
+
+    .how-heading {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--nuit);
+      margin-bottom: 2rem;
+    }
+
+    .how-heading em { font-style: italic; }
+
+    .how-body {
+      font-size: 0.97rem;
+      line-height: 1.9;
+      color: var(--pierre);
+      margin-bottom: 1.3rem;
+    }
+
+    .how-right {}
+
+    .how-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 2.5rem 1fr;
+      gap: 0 1.5rem;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid rgba(200,185,154,0.4);
+      align-items: start;
+    }
+
+    .step:first-child { border-top: 1px solid rgba(200,185,154,0.4); }
+
+    .step-letter {
+      font-family: var(--display);
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--cuivre);
+      padding-top: 0.2rem;
+    }
+
+    .step-title {
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--nuit);
+      margin-bottom: 0.3rem;
+    }
+
+    .step-desc {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--gris);
+    }
+
+    /* ── ACCESS PANEL ── */
+    .access {
+      background: var(--nuit);
+      padding: 6rem var(--pad);
+    }
+
+    .access-inner {
+      max-width: var(--col);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .access-eyebrow {
+      font-size: 0.6rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--sable);
+      margin-bottom: 2rem;
+      display: block;
+    }
+
+    .access-heading {
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.2;
+      color: var(--brume);
+      margin-bottom: 2rem;
+    }
+
+    .access-body {
+      font-size: 0.97rem;
+      line-height: 1.9;
+      color: rgba(240,237,230,0.55);
+      margin-bottom: 3.5rem;
+    }
+
+    .access-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(200,185,154,0.1);
+      margin-bottom: 4rem;
+      text-align: left;
+    }
+
+    .access-item {
+      padding: 2rem 1.8rem;
+      background: var(--nuit);
+    }
+
+    .access-item-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--cuivre);
+      margin-bottom: 0.7rem;
+    }
+
+    .access-item-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(240,237,230,0.6);
+    }
+
+    /* ── CTA ── */
+    .cta-wrap {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      background: var(--brume);
+      color: var(--nuit);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: #fff; }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 1rem 2.8rem;
+      border: 1px solid rgba(200,185,154,0.3);
+      color: rgba(240,237,230,0.6);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--sable);
+      color: var(--brume);
+    }
+
+    /* ── TESTIMONIAL ── */
+    .testimonial {
+      max-width: var(--col);
+      margin: 0 auto;
+      padding: 6rem var(--pad);
+      text-align: center;
+    }
+
+    .testi-quote {
+      font-family: var(--display);
+      font-size: clamp(1.4rem, 3.2vw, 2rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--nuit);
+      margin-bottom: 2rem;
+    }
+
+    .testi-attr {
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gris);
+    }
+
+    .testi-attr span {
+      color: var(--cuivre);
+    }
+
+    /* ── CREDIT ── */
+    .credit {
+      background: var(--brume);
+      border-top: 1px solid rgba(200,185,154,0.4);
+      padding: 1.4rem var(--pad);
+      text-align: center;
+    }
+
+    .credit p {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gris);
+    }
+
+    .credit a { color: var(--cuivre); text-decoration: none; }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .card::after { display: none; }
+    }
+
+    /* ── 900px — tablet ── */
+    @media (max-width: 900px) {
+      .cards { grid-template-columns: 1fr 1fr; }
+      .how-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .access-grid { grid-template-columns: 1fr; }
+      .hero-bottom { grid-template-columns: 1fr; }
+      .hero-scroll { display: none; }
+    }
+
+    /* ── 600px — mobile ── */
+    @media (max-width: 600px) {
+      /* Nav */
+      .nav-links { display: none; }
+      .nav-right { gap: 0; }
+      .nav-cta { display: none; }
+
+      /* Hero */
+      .hero { padding: 5rem var(--pad) 3.5rem; min-height: 90vh; }
+      .hero-headline { margin-bottom: 2.5rem; }
+      .hero-bottom { padding-top: 1.8rem; gap: 1.2rem; }
+      .hero-sub { font-size: 0.95rem; }
+
+      /* Intro */
+      .intro { padding: 3.5rem var(--pad); }
+
+      /* Experiences */
+      .experiences { padding: 3.5rem var(--pad); }
+      .exp-header { flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+      .cards { grid-template-columns: 1fr; }
+      .card { padding: 2rem 1.6rem 1.8rem; }
+
+      /* How we work */
+      .how { padding: 3.5rem var(--pad); }
+      .how-inner { gap: 2.5rem; }
+      .step { padding: 1.3rem 0; }
+
+      /* Access */
+      .access { padding: 3.5rem var(--pad); }
+      .access-item { padding: 1.6rem 1.4rem; }
+      .access-body { margin-bottom: 2.5rem; }
+      .cta-wrap { flex-direction: column; align-items: center; gap: 1rem; }
+      .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+
+      /* Testimonial */
+      .testimonial { padding: 3.5rem var(--pad); }
+      .testi-attr {
+        font-size: 0.58rem;
+        line-height: 2;
+        letter-spacing: 0.15em;
+      }
+
+      /* Credit */
+      .credit p {
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+        line-height: 2;
+      }
+    }
+
+    /* ── 420px — small phones ── */
+    @media (max-width: 420px) {
+      /* Hero */
+      .hero { padding: 4.5rem var(--pad) 3rem; }
+      .hero-eyebrow { font-size: 0.55rem; letter-spacing: 0.22em; }
+
+      /* Intro */
+      .intro { padding: 3rem var(--pad); }
+
+      /* Experiences */
+      .experiences { padding: 3rem var(--pad); }
+      .card { padding: 1.8rem 1.4rem 1.6rem; }
+      .card-num { margin-bottom: 1.2rem; }
+
+      /* How */
+      .how { padding: 3rem var(--pad); }
+
+      /* Access */
+      .access { padding: 3rem var(--pad); }
+      .access-grid { margin-bottom: 2.5rem; }
+      .btn-primary, .btn-ghost { padding: 0.9rem 1.5rem; }
+
+      /* Testimonial */
+      .testimonial { padding: 3rem var(--pad); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">Abondance</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#">Corporate Events</a></li>
+        <li><a href="#">Private Travel</a></li>
+        <li><a href="#">Journal</a></li>
+      </ul>
+      <a class="nav-cta" href="#">Brief Us</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Destination Management · Paris &amp; France</span>
+      <h1 class="hero-headline">
+        Paris is not<br>
+        a backdrop.<br>
+        It is the <em>material.</em>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-sub">
+          We are an independent Parisian agency specialising in corporate events and private travel.
+          We give international clients <strong>access to places, people, and moments</strong>
+          that are not on any itinerary. Because they have never been on any itinerary.
+        </p>
+        <span class="hero-scroll">Discover</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO -->
+  <section class="intro reveal">
+    <span class="section-tag">Our approach</span>
+    <h2 class="intro-heading">
+      Corporate events became<br>
+      <em>industrialised.</em><br>
+      We built Abondance to fix that.
+    </h2>
+    <p class="body-text">
+      The same hotel ballroom. The same three dinner venues. The same team-building formats
+      your guests have sat through in four other cities. Eugénie O'Byrne Peyre spent years inside
+      luxury marketing and strategy consulting watching that happen. Watching people leave
+      events having felt nothing.
+    </p>
+    <p class="body-text">
+      Abondance was founded on a different premise: that an event should feel like a
+      moment in someone's life, not a line item in a budget. We design every experience from
+      your organisation's identity outward: who you are, what you need your guests to
+      feel, and what Paris can do that nowhere else can.
+    </p>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- EXPERIENCE CARDS -->
+  <section class="experiences">
+    <div class="exp-header reveal">
+      <h2 class="exp-heading">What access <em>actually</em> looks like</h2>
+      <a href="#" class="exp-link">All experiences →</a>
+    </div>
+
+    <div class="cards">
+
+      <div class="card reveal">
+        <div class="card-inner">
+          <span class="card-num">i.</span>
+          <h3 class="card-title">Les Invalides<br>after dark</h3>
+          <p class="card-body">
+            A private nocturnal tour of one of Paris's most storied monuments, after the last
+            visitor has left and the doors have closed to the public. Your guests have
+            Napoleon's tomb to themselves.
+          </p>
+          <span class="card-tag">Cultural Immersion · VIP</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-inner">
+          <span class="card-num">ii.</span>
+          <h3 class="card-title">Backstage at<br>the Palais Garnier</h3>
+          <p class="card-body">
+            Behind the velvet curtain of Paris's legendary opera house. Encounters with
+            principal dancers, access to the costume ateliers, and a private performance
+            space your guests will describe for years.
+          </p>
+          <span class="card-tag">Exclusive Access · Cultural</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-inner">
+          <span class="card-num">iii.</span>
+          <h3 class="card-title">A secret garden<br>in Montmartre</h3>
+          <p class="card-body">
+            An elegant summer gathering in a private mansion hidden from the street.
+            Gourmet barbecue in a walled garden, a Parisian mixologist, live jazz,
+            and a panorama over the city that most Parisians have never seen.
+          </p>
+          <span class="card-tag">Client Evening · Gastronomic</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-inner">
+          <span class="card-num">iv.</span>
+          <h3 class="card-title">A fictitious auction<br>at Drouot</h3>
+          <p class="card-body">
+            A bespoke theatrical experience inside the Hotel Drouot, Paris's legendary
+            auction house, designed entirely for your group. Part dinner, part spectacle,
+            entirely unlike anything in the event format handbook.
+          </p>
+          <span class="card-tag">Brand Activation · Immersive</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-inner">
+          <span class="card-num">v.</span>
+          <h3 class="card-title">Swedish Lapland<br>incentive journey</h3>
+          <p class="card-body">
+            When France is not the destination, Abondance travels with you. A bespoke
+            incentive trip to Swedish Lapland, designed, executed, and lived in detail,
+            from the first briefing to the final night.
+          </p>
+          <span class="card-tag">Incentive Travel · International</span>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-inner">
+          <span class="card-num">vi.</span>
+          <h3 class="card-title">Comporta at<br>sunset</h3>
+          <p class="card-body">
+            Surfing. Horseback riding on the beach. A long dinner that begins
+            when the light goes. Portugal's most quietly coveted coastline,
+            arranged around the rhythm of the day.
+          </p>
+          <span class="card-tag">Private Travel · Slow Luxury</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="rule" />
+
+  <!-- HOW WE WORK -->
+  <section class="how">
+    <div class="how-inner">
+      <div class="how-left reveal">
+        <span class="section-tag">Working with us</span>
+        <h2 class="how-heading">
+          One brief.<br>
+          One point of contact.<br>
+          <em>No standard formats.</em>
+        </h2>
+        <p class="how-body">
+          We are a deliberately small agency. Every project is handled by Eugénie and
+          a senior team member, not handed to a junior account manager once the contract
+          is signed. You have a single point of contact from first conversation to the
+          morning after the event.
+        </p>
+        <p class="how-body">
+          We work with international agencies, executive assistants to C-suite, and
+          incentive travel buyers planning events for between 10 and 400 guests. We speak
+          English, French, and the language of people who have done this long enough to
+          know when something is going to be remarkable.
+        </p>
+      </div>
+
+      <div class="how-right reveal">
+        <div class="how-steps">
+          <div class="step">
+            <span class="step-letter">a.</span>
+            <div>
+              <p class="step-title">Brief</p>
+              <p class="step-desc">Tell us your objectives, your guests, your dates, and your instincts. We handle the rest.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-letter">b.</span>
+            <div>
+              <p class="step-title">Concept</p>
+              <p class="step-desc">We design a bespoke proposal (venues, experiences, narrative arc) built around your organisation specifically.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-letter">c.</span>
+            <div>
+              <p class="step-title">Execution</p>
+              <p class="step-desc">We manage every supplier, every timeline, every logistical detail. You arrive on the day. We make it happen.</p>
+            </div>
+          </div>
+          <div class="step">
+            <span class="step-letter">d.</span>
+            <div>
+              <p class="step-title">After</p>
+              <p class="step-desc">A full debrief, guest feedback, and documentation. Because the event should be a reference point, not a one-off.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACCESS PANEL -->
+  <section class="access">
+    <div class="access-inner">
+      <span class="access-eyebrow reveal">Our network</span>
+      <h2 class="access-heading reveal">
+        The addresses we know<br>
+        are not on TripAdvisor.
+      </h2>
+      <p class="access-body reveal">
+        Over three years of building relationships with the people who hold the keys to
+        Paris's most private spaces: private mansions, museum curators, Michelin chefs
+        who do not take corporate bookings, and cultural institutions whose off-hours
+        access is not available to the public.
+      </p>
+
+      <div class="access-grid reveal">
+        <div class="access-item">
+          <p class="access-item-label">Venues</p>
+          <p class="access-item-text">Private hôtels particuliers, museums after hours, châteaux, rooftop estates, and spaces that have no public-facing presence.</p>
+        </div>
+        <div class="access-item">
+          <p class="access-item-label">People</p>
+          <p class="access-item-text">Michelin chefs, master sommeliers, couture houses, cultural insiders, artists, and performers who work by recommendation only.</p>
+        </div>
+        <div class="access-item">
+          <p class="access-item-label">Moments</p>
+          <p class="access-item-text">Experiences that exist because we designed them. Not experiences that exist in a catalogue and are sold to every client who asks.</p>
+        </div>
+      </div>
+
+      <div class="cta-wrap reveal">
+        <a href="#" class="btn-primary">Send us your brief</a>
+        <a href="#" class="btn-ghost">View past events</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="testimonial reveal">
+    <p class="testi-quote">
+      "They didn't ask us to choose from a list. They asked us who we were,
+      and built something that could only have been designed for us."
+    </p>
+    <p class="testi-attr">
+      Senior Executive Assistant &nbsp;·&nbsp;
+      <span>Chief of Staff, Global Investment Firm</span>
+    </p>
+  </section>
+
+  <!-- CREDIT -->
+  <div class="credit">
+    <p>
+      Spec copy sample by <a href="https://thesilkpen.in" target="_blank">The Silk Pen</a>
+      &nbsp;·&nbsp; Copywriting for luxury, lifestyle &amp; experience brands
+      &nbsp;·&nbsp; <a href="mailto:hello@thesilkpen.in">hello@thesilkpen.in</a>
+    </p>
+  </div>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  </script>
+
+</body>
+</html>
